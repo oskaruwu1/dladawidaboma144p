@@ -1,0 +1,51 @@
+CREATE TABLE 'Produkty'  (id int,
+    nazwa varchar(55),
+   	kategoria  varchar(55),
+    cena float(11)
+    );
+
+INSERT INTO 'Produkty'  VALUES
+(1, 'Laptop Dell XPS', 'Elektronika', 4999.99),
+(2, 'Telefon Samsung Galaxy', 'Elektronika', 2999.99),
+(3, 'Książka "Sztuka wojny"', 'Książki', 49.99),
+(4, 'Smartwatch Apple Watch', 'Elektronika', 1999.99),
+(5, 'Kurtka zimowa', 'Odzież', 399.99),
+(6, 'Buty sportowe', 'Odzież', 249.99),
+(7, 'Rower górski', 'Sport', 1999.99),
+(8, 'Gitara akustyczna', 'Instrumenty', 599.99);
+
+CREATE TABLE 'Uzytkownicy'  (id int,
+    imie varchar(55),
+   	nazwisko  varchar(55),
+    email varchar(55),
+    wiek int(3)
+    );
+
+INSERT INTO 'Uzytkownicy' VALUES
+(1, 'Jan', 'Kowalski', 'jank.kowalski@example.com', 30),
+(2, 'Anna', 'Nowak', 'anna.nowak@example.com', 25),
+(3, 'Piotr', 'Zieliński', 'piotr.zielinski@example.com', 40),
+(4, 'Maria', 'Wiśniewska', 'maria.wisniewska@example.com', 35),
+(5, 'Krzysztof', 'Adamski', 'krzysztof.adamski@example.com', 28),
+(6, 'Joanna', 'Wójcik', 'joanna.wojcik@example.com', 32),
+(7, 'Tomasz', 'Lewandowski', 'tomasz.lewandowski@example.com', 50),
+(8, 'Agnieszka', 'Kozlowska', 'agnieszka.kozlowska@example.com', 45);
+
+CREATE TABLE 'Zamowienia' (id int,
+   id_uzytkownika  int,
+   id_produktu  int,
+   data_zamowienia date,
+   ilosc int
+    );
+
+INSERT INTO 'Zamowienia' VALUES
+(1, 1, 1, 2024-11-01, 1),
+(2, 2, 3, 2024-11-02, 2),
+(3, 3, 2, 2024-11-03, 1),
+(4, 4, 5, 2024-11-04, 1),
+(5, 5, 4, 2024-11-05, 1),
+(6, 6, 7, 2024-11-06, 1),
+(7, 7, 8, 2024-11-07, 1),
+(8, 8, 6, 2024-11-08, 3);
+
+SELECT Zamowienia.id AS "Zamowienie_ID", Produkty.nazwa AS "Produkt", Produkty.cena AS "Wartosc", CASE WHEN produkty.cena<=1000 THEN "Niska wartość" WHEN produkty.cena>1000 AND produkty.cena<=2000 THEN "Średnia wartość" WHEN produkty.cena>2000 THEN "Wysoka wartość" END AS "Kategoria_Wartości" FROM "Produkty" JOIN "Zamowienia" ON Produkty.id = Zamowienia.id_produktu ORDER BY Zamowienia.id;
